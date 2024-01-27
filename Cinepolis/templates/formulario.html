@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <form action="/" method="POST">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" class="form-control" name="nombre" id="nombre" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="nCompradores" class="form-label">Cantidad de compradores:</label>
+          <input type="number" class="form-control" name="nCompradores" id="nCompradores" required min="1" />
+        </div>
+
+        <div class="mb-3">
+          <label for="nBoletos" class="form-label">Cantidad de boletos:</label>
+          <input type="number" class="form-control" name="nBoletos" id="nBoletos" required min="1" />
+        </div>
+
+        <h4>Tarjeta Cineco</h4>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="tarjetaCineco" id="flexRadioDefault1" value="si">
+          <label class="form-check-label" for="flexRadioDefault1">SI</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="tarjetaCineco" id="flexRadioDefault2" value="no" checked>
+          <label class="form-check-label" for="flexRadioDefault2">NO</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Calcular</button>
+      </form>
+    </div>
+  </div>
+  <div class="mt-4">
+    <h2>Total a pagar:</h2>
+
+    {% if resultado %}
+
+    <p>{{ resultado }}</p>
+
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
