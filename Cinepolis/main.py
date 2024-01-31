@@ -31,7 +31,7 @@ def procesar(form_data):
     total_con_descuento = total - (total * descuento)
 
     if tarjeta_cineco:
-        descuento_adicional = 0.10  # 10% adicional
+        descuento_adicional = 0.10 
         total_con_descuento -= (total_con_descuento * descuento_adicional)
 
     resultado = "El total a pagar por {} es: ${:.2f}".format(nombre, total_con_descuento)
