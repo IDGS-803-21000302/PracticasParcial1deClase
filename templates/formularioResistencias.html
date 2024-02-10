@@ -1,0 +1,39 @@
+
+{%extends 'layout.html' %}
+
+{%block content %}
+    {% import "_macros.html" as macros %}
+    <h1>Resistencia</h1>
+    <form action="" method="post">
+
+    {{macros.render_field(form.primeraBanda)}}
+    {{macros.render_field(form.segundaBanda)}}
+    {{macros.render_field(form.terceraBanda)}}
+    {{macros.render_field(form.tolerancia)}}
+
+    <input type="submit" name="tn1" value="Enviar">
+
+</form>
+
+<table style="width:100%" border="1">
+    <tr>
+      <th>Color 1</th>
+      <th>Color 2</th>
+      <th>Color 3</th>
+      <th>Tolerancia</th>
+      <th>Valor</th>
+      <th>Valor maximo</th>
+      <th>Valor minimo</th>
+    </tr>
+    <tr>
+        <td style="color:white; background-color: {{ colorbanda1 }};">{{ primeraBanda }}</td>
+        <td style="color:white; background-color: {{ colorbanda2 }};">{{ segundaBanda }}</td>   
+        <td style="color:white; background-color: {{ colorbanda3 }};">{{ terceraBanda }}</td>
+      <td style="color:white; background-color: {{ colorTolerancia }};">{{porcentaje}}</td>
+      <td>{{total1}}</td>
+      <td>{{totalToleranciaMax}}</td>
+      <td>{{totalToleranciaMin}}</td>
+    </tr>
+
+  </table>
+{%endblock%}
