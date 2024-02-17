@@ -1,0 +1,25 @@
+{%extends 'layout.html' %}
+
+{%block content %}
+{% import "_macros.html" as macros %}
+<h1>Añadir</h1>
+<form action="" method="post" novalidate>
+
+    {{macros.render_field(form.PalabraEspaniol)}}
+    {{macros.render_field(form.PalabraIngles)}}
+    <input class="btn btn-primary" type="submit" name="agregar" value="Agregar">
+
+</form>
+
+<h1>Traducir</h1>
+<form action="" method="post" novalidate>
+
+    {{macros.render_field(read_form.Palabra)}}
+    {{macros.render_field(read_form.Idioma)}}
+
+    <input class="btn btn-primary" type="submit" name="traducir" value="Traducir">
+
+</form>
+<h4>{{traduccion}}</h4>
+
+{%endblock%}

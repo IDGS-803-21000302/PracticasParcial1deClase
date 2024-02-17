@@ -1,0 +1,7 @@
+rojo:red
+hola:hello
+mama:mother
+holamundo:helloword
+azul:blue
+zapato:shoe
+

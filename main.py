@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import form
 from math import sqrt
+from io import open
 
 
 app = Flask(__name__)
@@ -260,9 +261,47 @@ def resistencias():
         
     return render_template("formularioResistencias.html",form=resistenciasForm,totalToleranciaMin=totalToleranciaMin,totalToleranciaMax=totalToleranciaMax,total1=total1,primeraBanda=primeraBanda,segundaBanda=segundaBanda,terceraBanda=terceraBanda,porcentaje=porcentaje,colorbanda1=colorbanda1,colorbanda2=colorbanda2,colorbanda3=colorbanda3,colorTolerancia=colorTolerancia)
 
+@app.route("/diccionario", methods=["GET", "POST"])
+def dicc():
+    palEsp = ''
+    palIng = ''
+    traduccion = ''
 
+    dicc_form = form.diccionarioForm(request.form)
+    dicc_read_form = form.diccionarioReadForm(request.form)
+    if request.method == 'POST':
+        if 'agregar' in request.form:
+            if dicc_form.validate():
+                palEsp = dicc_form.PalabraEspaniol.data.strip().lower()
+                palIng = dicc_form.PalabraIngles.data.strip().lower()
+                traduccion='Palabra guardada con exito'
+                with open('diccionario.txt', 'a') as archivo_texto:
+                    archivo_texto.write('{}:{}\n'.format(palEsp, palIng))
+                
+                    
+            else:
+                print("Errores de validación al agregar.")
+                
 
+        elif 'traducir' in request.form:
+            if dicc_read_form.validate():
+                palabra = dicc_read_form.Palabra.data.strip().lower()
+                idioma = dicc_read_form.Idioma.data 
+                with open('diccionario.txt', 'r') as archivo:
+                    for linea in archivo:
+                        partes = linea.strip().split(':')
+                        if len(partes) == 2:
+                            index_buscar = 0 if idioma == 'espaniol' else 1
+                            index_mostrar = 1 - index_buscar  
+                            if partes[index_buscar].lower() == palabra:
+                                traduccion = partes[index_mostrar]
+                                break
+            else:
+                print("Errores de validación al traducir.")
 
+    return render_template("formularioDiccionario.html", form=dicc_form,read_form=dicc_read_form, traduccion=traduccion)
+
+    
 
 
 if __name__ == "__main__":
